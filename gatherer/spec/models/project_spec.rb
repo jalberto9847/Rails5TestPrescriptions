@@ -4,6 +4,8 @@ RSpec.describe Project do
   let(:project) { Project.new }
   let(:task) { Task.new }
 
+  it_should_behave_like "sizeable"
+
   it "properly handles a blank project" do
     expect(project.completed_velocity).to eq(0)
     expect(project.current_rate).to eq(0)
@@ -38,7 +40,7 @@ RSpec.describe Project do
     end
 
     it "can calculate total size" do
-      expect(project.total_size).to eq(10)
+      expect(project.size).to eq(10)
     end
 
     it "can calculate remaining size" do
