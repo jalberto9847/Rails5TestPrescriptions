@@ -8,7 +8,7 @@ RSpec::Matchers.define :be_of_size do |expected|
     "have tasks totaling #{expected} points"
   end
 
-  failure_message do
+  failure_message do |actual|
     "expected project #{actual.name} to have size #{expected}, was #{actual}"
   end
 
