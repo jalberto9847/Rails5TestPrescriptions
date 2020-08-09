@@ -40,4 +40,9 @@ class Project < ApplicationRecord
     return false if projected_days_remaning.nan?
     (Time.zone.today + projected_days_remaning) <= due_date
   end
+
+  def self.find_recently_started(time_span)
+    old_time = Date.today - time_span
+    where("due_date > ?", old_time)
+  end
 end
