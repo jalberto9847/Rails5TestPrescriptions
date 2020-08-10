@@ -4,6 +4,24 @@ RSpec.describe Project do
   describe "without a task" do
     let(:project) { FactoryBot.build_stubbed(:project) }
 
+    it "stubs an object" do
+      project = Project.new(name: "Project Greenlight")
+      allow(project).to receive(:name)
+      expect(project.name).to be_nil
+    end
+
+    it "stubs an object again" do
+      project = Project.new(name: "Project Greenlight")
+      allow(project).to receive(:name).and_return("Fred")
+      expect(project.name).to eq("Fred")
+    end
+
+    it "stubs the class" do
+      allow(Project).to receive(:find).and_return(Project.new(name: "Project Greenlight"))
+      project = Project.find(1)
+      expect(project.name).to eq("Project Greenlight")
+    end
+
     it "considers a project with no tasks to be done" do
       expect(project).to be_done
     end
