@@ -22,6 +22,12 @@ RSpec.describe Project do
       expect(project.name).to eq("Project Greenlight")
     end
 
+    it "mocks an object" do
+      mock_project = Project.new(name: "Project Greenlight")
+      expect(mock_project).to receive(:name).and_return("Fred")
+      expect(mock_project.name).to eq("Fred")
+    end
+
     it "considers a project with no tasks to be done" do
       expect(project).to be_done
     end
