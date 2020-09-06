@@ -22,6 +22,14 @@ RSpec.describe Project do
       expect(project.name).to eq("Project Greenlight")
     end
 
+    it "stubs the class" do
+      allow(Project).to receive(:find).and_raise(ActiveRecord::RecordNotFound)
+      allow(Project).to receive(:find).with(1).and_return(Project.new(name: "Project Greenlight"))
+      allow(Project).to receive(:find).with(3).and_return(Project.new(name: "Project Runway"))
+      project = Project.find(1)
+      expect(project.name).to eq("Project Greenlight")
+    end
+
     it "mocks an object" do
       mock_project = Project.new(name: "Project Greenlight")
       expect(mock_project).to receive(:name).and_return("Fred")
